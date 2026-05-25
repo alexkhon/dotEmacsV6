@@ -206,7 +206,21 @@
                     :font "0xProto Nerd Font Mono"
                     :height 110)
 
+;; set non edit mode fonts
+;; ...........................................................................
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (face-remap-add-relative 'default :family "0xProto Nerd Font Mono" :height 120)))
 
+(add-hook 'ibuffer-mode-hook
+          (lambda ()
+            (face-remap-add-relative 'default :family "0xProto Nerd Font Mono" :height 120)))
+
+(add-hook 'shell-mode-hook
+          (lambda ()
+            (setq-local buffer-face-mode-face '(:family "0xProto Nerd Font Mono" :height 120))
+            (buffer-face-mode 1)
+            ))
 
 
 ;; nerd-icons
@@ -303,14 +317,6 @@
   (require 'ibuffer-sidebar)
   (setq ibuffer-sidebar-use-custom-font t)
   (setq ibuffer-sidebar-face `(:family "0xProto Nerd Font Mono" :height 130)))
-
-
-;; none of the icon packages worked for ibuffer
-;; --------------------------------------------------------------------------------
-;; (use-package nerd-icons-ibuffer
-;;   :straight
-;;   (nerd-icon-ibuffer :type git :host github :repo "seagle0128/nerd-icons-ibuffer")
-;;   )
 
 
 ;; imenu-list
