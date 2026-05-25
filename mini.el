@@ -263,7 +263,16 @@
   (setq doom-modeline-time-icon nil)
   (setq doom-modeline-time t)
   (doom-modeline-mode t)
-  )
+
+  ;; setting nord colors in the modeline
+  (set-face-attribute 'mode-line nil 
+                      :background "#5E81AC" 
+                      :box nil)
+
+  (set-face-attribute 'mode-line-inactive nil 
+                      :background "#2E3440" 
+                      :box nil)
+    )
 
 
 ;; ===========================================================================
