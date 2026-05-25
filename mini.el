@@ -539,7 +539,7 @@
 (global-set-key (kbd "M-s-x") 'meta-super-x-map)
 
 (define-key meta-super-x-map (kbd "s") #'+sidebar-toggle)
-
+(define-key meta-super-x-map (kbd "w") #'ace-window)
 
 ;; regions
 ;; --------------------------------------------------------------------------------
