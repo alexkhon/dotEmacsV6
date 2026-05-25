@@ -515,6 +515,8 @@
 (global-set-key (kbd "s-s")         #'save-some-buffers)
 (global-set-key (kbd "s-o")         #'find-file)
 (global-set-key (kbd "s-t")         #'tab-new)
+(global-set-key (kbd "s-w")         #'delete-frame)
+(global-set-key (kbd "s-n")         #'make-frame-command)
 
 (global-set-key (kbd "s-,") (lambda () (interactive)
                               (if user-init-file
