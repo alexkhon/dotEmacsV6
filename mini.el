@@ -258,15 +258,20 @@
 ;; ...........................................................................
 (add-hook 'dired-mode-hook
           (lambda ()
-            (face-remap-add-relative 'default :family "0xProto Nerd Font Mono" :height 120)))
+            (face-remap-add-relative 'default
+				     :family "0xProto Nerd Font Mono"
+				     :height 120)))
 
 (add-hook 'ibuffer-mode-hook
           (lambda ()
-            (face-remap-add-relative 'default :family "0xProto Nerd Font Mono" :height 120)))
+            (face-remap-add-relative 'default
+				     :family "0xProto Nerd Font Mono"
+				     :height 120)))
 
 (add-hook 'shell-mode-hook
           (lambda ()
-            (setq-local buffer-face-mode-face '(:family "0xProto Nerd Font Mono" :height 120))
+            (setq-local buffer-face-mode-face
+			'(:family "0xProto Nerd Font Mono" :height 120))
             (buffer-face-mode 1)
             ))
 
