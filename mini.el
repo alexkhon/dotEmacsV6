@@ -627,6 +627,10 @@
 (global-set-key (kbd "s-w")         #'delete-frame)
 (global-set-key (kbd "s-n")         #'make-frame-command)
 
+(global-set-key (kbd "s--")         #'text-scale-decrease)
+(global-set-key (kbd "s-=")         #'text-scale-increase)
+
+
 (global-set-key (kbd "s-,") (lambda () (interactive)
                               (if user-init-file
                                   (find-file user-init-file)
