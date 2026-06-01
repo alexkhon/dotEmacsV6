@@ -96,6 +96,15 @@
   ;;(add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'turn-on-auto-fill)
 
+  ;; babel
+  ;; https://orgmode.org/worg/org-contrib/babel/
+  ;; https://eschulte.github.io/org-scraps/
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((python . t)
+     (shell . t)
+     ))
+)
 
 ;; org-modern
 ;; ---------------------------------------------------------------------------
