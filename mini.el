@@ -224,7 +224,9 @@
 
 ;; Make the current line number more apparent
 ;; ---------------------------------------------------------------------------
-(set-face-attribute 'line-number-current-line nil :foreground "#ECEFF4" :background "black")
+(set-face-attribute 'line-number-current-line nil
+		    :foreground "#ECEFF4"
+		    :background "black")
 
 ;; Highlight current line
 ;; ---------------------------------------------------------------------------
@@ -239,11 +241,11 @@
 ;; fonts
 ;; --------------------------------------------------------------------------------
 (set-face-attribute 'default nil
-                    :family "Iosevka Term"
+                    :family "Iosevka Nerd Font Mono"
                     :height 140)
 
 (set-face-attribute 'variable-pitch nil
-                    :family "Iosevka Aile")
+                    :family "Iosevka Nerd Font Mono")
 
 (set-face-attribute 'fixed-pitch nil
                     :font "0xProto Nerd Font Mono"
@@ -388,6 +390,7 @@
 
 
 ;; function to toggle both
+;; ---------------------------------------------------------------------------
 (defun +sidebar-toggle ()
   "Toggle both `dired-sidebar' and `ibuffer-sidebar'."
   (interactive)
@@ -668,6 +671,6 @@
 
 
 ;; windows separator
-(setq window-divider-default-right-width 2)
-(setq window-divider-default-bottom-width 2)
+(setq-default window-divider-default-right-width 2)
+(setq-default window-divider-default-bottom-width 2)
 (window-divider-mode t)
