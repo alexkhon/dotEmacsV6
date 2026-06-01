@@ -174,6 +174,9 @@
 ;; minibuffer packages
 ;; ===========================================================================
 
+;; https://alexforsale.github.io/posts/emacs-vertico/
+;; https://prelude.emacsredux.com/en/stable/modules/vertico/ 
+
 ;; vertico
 ;; ---------------------------------------------------------------------------
 (use-package vertico
