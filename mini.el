@@ -44,6 +44,37 @@
   (straight-use-package-by-default t) ;; Use straight.el by default
   )
 
+;; ===========================================================================
+;; Git related packages
+;; ===========================================================================
+
+;; magit
+;; ---------------------------------------------------------------------------
+(use-package magit
+  ;; git interface: install as early as possible to avoid issues
+  :ensure t
+  :config
+  ;; https://www.reddit.com/r/emacs/comments/179t67l/comment/k5b56i2/
+  ;; this will open magit full screen and return to previous buffer when done
+  (setq magit-display-buffer-function 'magit-display-buffer-fullframe-status-topleft-v1)
+  (setq magit-bury-buffer-function 'magit-restore-window-configuration)
+  )
+
+;; git-gutter
+;; https://ianyepan.github.io/posts/emacs-git-gutter/
+;; ---------------------------------------------------------------------------
+(use-package git-gutter
+	:hook (prog-mode . git-gutter-mode)
+	:config
+	(setq git-gutter:update-interval 0.02))
+
+(use-package git-gutter-fringe)
+
+
+(define-fringe-bitmap 'git-gutter-fr:added [224] nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:modified [224] nil nil '(center repeated))
+(define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom)
+
 
 ;; ===========================================================================
 ;; Org related packages
