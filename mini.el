@@ -381,8 +381,8 @@
   :config
   (setq imenu-list-position 'right)
   (setq imenu-list-size 35)
-  :hook
-  (prog-mode . imenu-list-minor-mode)
+  ;; :hook
+  ;; (prog-mode . imenu-list-minor-mode)
   )
 
 
