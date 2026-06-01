@@ -134,7 +134,7 @@
    org-agenda-tags-column 0
    org-ellipsis " …")
 
-  (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font Mono")
+;;  (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font Mono")
   (with-eval-after-load 'org (global-org-modern-mode)))
 
 
