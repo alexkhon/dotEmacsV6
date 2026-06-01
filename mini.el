@@ -396,6 +396,30 @@
 
 
 ;; ===========================================================================
+;; snippet packages
+;; ===========================================================================
+
+;; yasnippet
+;; ---------------------------------------------------------------------------
+(use-package yasnippet
+  ;; snippets
+  :config
+  ;; Personal snippet directory
+  ;; 1. Use full path, symlinks does not seem to work
+  ;; 2. Point to the top level directory
+  (setq yas-snippet-dirs
+	'("~/Config/dotEmacsV5/snippets"))
+  (yas-global-mode 1)
+  :bind
+  ;; https://emacs.stackexchange.com/questions/66352/how-to-change-key-binding-for-yas-expand
+  (:map yas-minor-mode-map
+        ("C-'". yas-expand)
+        ([(tab)] . nil)
+        ("TAB" . nil))
+  )
+
+
+;; ===========================================================================
 ;; windows
 ;; ===========================================================================
 
