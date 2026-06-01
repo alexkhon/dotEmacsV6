@@ -471,6 +471,12 @@
 	  ))
   (openwith-mode t))
 
+;; auto refresh files
+;; auto reload file if the file has been updated
+;; https://stackoverflow.com/questions/1480572/how-to-have-emacs-auto-refresh-all-buffers-when-files-have-changed-on-disk
+;; ---------------------------------------------------------------------------
+(global-auto-revert-mode t)
+(setq auto-revert-use-notify nil)
 
 ;; ===========================================================================
 ;; mark region
