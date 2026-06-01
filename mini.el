@@ -159,6 +159,10 @@
   :bind (:map markdown-mode-map
          ("C-c C-e" . markdown-do)))
 
+;; ===========================================================================
+;; dired
+;; ===========================================================================
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV5/babel/dired.org"))
 
 
 
