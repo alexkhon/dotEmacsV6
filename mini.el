@@ -332,17 +332,6 @@
 ;; sidebars
 ;; ============================================================================
 
-(use-package nerd-icons-dired
-  ;; standardize the icons for dired
-  :hook
-  (dired-mode . nerd-icons-dired-mode))
-
-
-(use-package dired-hacks
-  :straight
-  (direct-hacks :type git :host github :repo "Fuco1/dired-hacks"))
-
-
 ;; replacement for treemacs
 ;;   dired subtree is required
 ;; ---------------------------------------------------------------------------
