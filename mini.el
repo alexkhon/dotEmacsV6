@@ -149,6 +149,10 @@
   :config ; add late to hook
   (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
 
+;; org-modern-indent requires that org-indented be turned on
+;; ---------------------------------------------------------------------------
+(setq org-startup-indented t)
+
 
 ;; ===========================================================================
 ;; markdown packages
