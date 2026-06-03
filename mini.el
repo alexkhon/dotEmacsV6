@@ -334,10 +334,15 @@
     (setq display-time-format "%Y-%m-%d %a %H:%M")
     )
 
-  ;; setting nord colors in the modeline
-  (set-face-attribute 'mode-line nil 
-                      :background "#5E81AC" 
-                      :box nil)
+  (setq akh-modeline-color 'blue)
+  (cond
+   ((string= akh-modeline-color 'red)    (set-face-attribute 'mode-line nil :background "#bf616a" ))
+   ((string= akh-modeline-color 'orange) (set-face-attribute 'mode-line nil :background "#d08770" ))
+   ((string= akh-modeline-color 'yellow) (set-face-attribute 'mode-line nil :background "#ebcb8b" ))
+   ((string= akh-modeline-color 'green)  (set-face-attribute 'mode-line nil :background "#a3be8c" ))
+   ((string= akh-modeline-color 'purple) (set-face-attribute 'mode-line nil :background "#b48ead" ))
+   ((string= akh-modeline-color 'blue)   (set-face-attribute 'mode-line nil :background "#5E81AC" ))
+   )
 
   (set-face-attribute 'mode-line-inactive nil 
                       :background "#2E3440" 
