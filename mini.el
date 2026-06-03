@@ -667,6 +667,8 @@
 
 (define-key meta-super-x-map (kbd "s") #'+sidebar-toggle)
 (define-key meta-super-x-map (kbd "w") #'ace-window)
+(define-key meta-super-x-map (kbd "d") #'dired-jump)
+(define-key meta-super-x-map (kbd "b") #'ibuffer)
 
 ;; regions
 ;; --------------------------------------------------------------------------------
