@@ -321,9 +321,18 @@
       (setq doom-modeline-icon nil))
   :config
   (setq doom-modeline-project-detection 'auto)
-  (setq doom-modeline-time-icon nil)
-  (setq doom-modeline-time t)
+
   (doom-modeline-mode t)
+  
+  (progn
+    ;; Enable the time and date in the modeline
+    (display-time-mode 1)
+    ;; Customize doom-modeline to show the time icon 
+    (setq doom-modeline-time-icon nil)
+    ;; Customize Emacs display-time to show the day and date
+    (setq display-time-day-and-date t)
+    (setq display-time-format "%Y-%m-%d %a %H:%M")
+    )
 
   ;; setting nord colors in the modeline
   (set-face-attribute 'mode-line nil 
