@@ -346,7 +346,9 @@
           (lambda ()
             (face-remap-add-relative 'default
 				     :family "0xProto Nerd Font Mono"
-				     :height 120)))
+				     :height 120)
+             (setq line-spacing 6)
+            ))
 
 (add-hook 'shell-mode-hook
           (lambda ()
@@ -354,6 +356,21 @@
 			'(:family "0xProto Nerd Font Mono" :height 120))
             (buffer-face-mode 1)
             ))
+
+(add-hook 'imenu-list-major-mode-hook
+          (lambda ()
+            ;; Change the font family and height (size * 10) locally
+            (face-remap-add-relative 'default
+                                     :family "0xProto Nerd Font Mono"
+                                     :height 120)
+            (setq line-spacing 6)
+            ))
+
+
+(add-hook 'neotree-mode-hook
+          (lambda ()
+            (setq buffer-face-mode-face '(:family "0xProto Nerd Font Mono" :height 120))
+            (buffer-face-mode)))
 
 
 ;; nerd-icons
