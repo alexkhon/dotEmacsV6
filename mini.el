@@ -621,6 +621,24 @@
 (setq initial-major-mode 'org-mode)
 
 
+;; ============================================
+;; Use Trash instead of rm 
+;; ============================================
+;; https://ashok-khanna.medium.com/introduction-to-dired-mode-91cecd3a06ff
+;; - OSX:   success
+;; - Linux: ???
+;; ---------------------------------------------------------------------------
+(cond
+ ((eq system-type 'darwin)    (setq trash-directory "~/.Trash"))
+ ((eq system-type 'gnu/linux) (setq trash-directory "~/.local/share/Trash/"))
+ )
+
+(setq delete-by-moving-to-trash t)
+
+
+
+
+
 ;; Set keys for Apple keyboard, for emacs in OS X
 ;; http://ergoemacs.org/emacs/emacs_hyper_super_keys.html
 ;; ------------------------------------------
