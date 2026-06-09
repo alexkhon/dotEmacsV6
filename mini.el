@@ -543,6 +543,29 @@
 
 
 
+;; ripgrep
+;; sudo port install ripgrep
+;; ------------------------------------------------------------------------------
+(use-package rg
+  ;; emacs ripgrep interface
+  :ensure t
+  ;;:config
+  ;; from protesilaus
+  ;; https://www.youtube.com/watch?v=4qLD4oHOrlc
+  ;; ..................................................
+;;  (rg-define-search default
+;;    :query ask
+;;    :format regexp
+;;    :dir (let ((vc (vc-root-dir)))
+;;	   (if vc
+;;	       vc
+;;	     default-directory))
+;;    :confirm prefix
+;;    :flags ("--sortr=path")
+;;    )
+  )
+
+
 
 
 ;; ===========================================================================
