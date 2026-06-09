@@ -214,6 +214,18 @@
   (marginalia-mode))
 
 
+;; consult
+;; this package allows you to preview
+;; ---------------------------------------------------------------------------
+(use-package consult
+  ;; mini-buffer is previewed in the edit window
+  :config
+  (consult-customize consult-buffer :sort t)
+  ;; need this for consult-recent-file
+  (recentf-mode)
+  )
+
+
 ;; ===========================================================================
 ;; Current line and line numbers
 ;; ===========================================================================
@@ -638,8 +650,10 @@
 
 (global-set-key (kbd "s-q")         #'save-buffers-kill-emacs)
 (global-set-key (kbd "s-s")         #'save-some-buffers)
+
 (global-set-key (kbd "s-o")         #'find-file)
-(global-set-key (kbd "s-t")         #'tab-new)
+(global-set-key (kbd "s-r")         #'consult-recent-file) ;; requires consult package
+
 ;; until I find a use for tabs in emacs, this is confusing
 ;; especially if you tab-new a sidebar pane
 ;;(global-set-key (kbd "s-t")         #'tab-new)
