@@ -640,6 +640,10 @@
 (global-set-key (kbd "s-s")         #'save-some-buffers)
 (global-set-key (kbd "s-o")         #'find-file)
 (global-set-key (kbd "s-t")         #'tab-new)
+;; until I find a use for tabs in emacs, this is confusing
+;; especially if you tab-new a sidebar pane
+;;(global-set-key (kbd "s-t")         #'tab-new)
+
 (global-set-key (kbd "s-w")         #'delete-frame)
 (global-set-key (kbd "s-n")         #'make-frame-command)
 
