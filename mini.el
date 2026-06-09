@@ -2,6 +2,10 @@
 ;; ===========================================================================
 
 ;; https://systemcrafters.net/emacs-from-scratch/the-best-default-settings/
+;; components in this file are used for
+;; - org-mode
+;; - prog-mode
+
 
 ;; ===========================================================================
 ;; Unclutter startup
