@@ -506,11 +506,20 @@
 (setq akh-mark-color 'green)
 
 (cond
-      ((string= akh-mark-color 'red)    (set-face-attribute 'region nil :background "#bf616a" :foreground "#000000"))
-      ((string= akh-mark-color 'orange) (set-face-attribute 'region nil :background "#d08770" :foreground "#000000"))
-      ((string= akh-mark-color 'yellow) (set-face-attribute 'region nil :background "#ebcb8b" :foreground "#000000"))
-      ((string= akh-mark-color 'green)  (set-face-attribute 'region nil :background "#a3be8c" :foreground "#000000"))
-      ((string= akh-mark-color 'purple) (set-face-attribute 'region nil :background "#b48ead" :foreground "#000000"))
+ ((string= akh-mark-color 'red)
+  (set-face-attribute 'region nil :background "#bf616a" :foreground "#000000"))
+
+ ((string= akh-mark-color 'orange)
+  (set-face-attribute 'region nil :background "#d08770" :foreground "#000000"))
+
+ ((string= akh-mark-color 'yellow)
+  (set-face-attribute 'region nil :background "#ebcb8b" :foreground "#000000"))
+
+ ((string= akh-mark-color 'green)
+  (set-face-attribute 'region nil :background "#a3be8c" :foreground "#000000"))
+
+ ((string= akh-mark-color 'purple)
+  (set-face-attribute 'region nil :background "#b48ead" :foreground "#000000"))
  )
 
 
