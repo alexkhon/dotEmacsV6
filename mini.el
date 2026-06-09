@@ -365,30 +365,12 @@
 ;; ===========================================================================
 ;; sidebars
 ;; ============================================================================
-
-;; replacement for treemacs
-;;   dired subtree is required
-;; ---------------------------------------------------------------------------
-(use-package dired-sidebar
+(use-package neotree
   :ensure t
-  :after dired
-  :commands (dired-sidebar-toggle-sidebar)
-  :init
-  (add-hook 'dired-sidebar-mode-hook
-            (lambda ()
-              (unless (file-remote-p default-directory)
-                (auto-revert-mode))))
+  :defer t
+  :bind ("<f8>" . neotree-toggle)
   :config
-  (push 'toggle-window-split dired-sidebar-toggle-hidden-commands)
-  (push 'rotate-windows dired-sidebar-toggle-hidden-commands)
-
-  (setq dired-sidebar-should-follow-file t)
-  (setq dired-sidebar-use-term-integration t)
-  (setq dired-sidebar-use-custom-font t)
-
-  :hook
-  ;; don't show the current and parent directory dots
-  (dired-mode . dired-omit-mode)
+  (setq neo-smart-open t)
   )
 
 ;; ibuffer-sidebar
