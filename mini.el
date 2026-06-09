@@ -459,13 +459,14 @@
   ;; useful when there are multiple windows
   :ensure t
   :config
-  (set-face-attribute
-   'aw-leading-char-face nil
-   :foreground "eceff4"
-   :background "#bf616a"
-   :weight 'bold
-   :height 3.0)
+  (set-face-attribute 'aw-leading-char-face nil
+                      :foreground "eceff4"
+                      :background "#bf616a"
+                      :weight 'bold
+                      :height 3.0)
   )
+
+
 
 ;; ===========================================================================
 ;; Project handling
