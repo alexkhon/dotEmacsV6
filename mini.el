@@ -685,6 +685,15 @@
 
 (define-key meta-super-spc-map (kbd "*") #'mc/mark-all-dwim)
 
+;; find
+;; --------------------------------------------------------------------------------
+(define-prefix-command 'meta-super-f-map)
+(global-set-key (kbd "M-s-f") 'meta-super-f-map)
+
+(define-key meta-super-f-map (kbd "l") #'consult-line)
+(define-key meta-super-f-map (kbd "i") #'consult-imenu)
+
+
 
 ;; ace window
 ;; --------------------------------------------------------------------------------
