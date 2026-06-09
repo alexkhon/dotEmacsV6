@@ -669,6 +669,7 @@
 (define-key meta-super-x-map (kbd "w") #'ace-window)
 (define-key meta-super-x-map (kbd "d") #'dired-jump)
 (define-key meta-super-x-map (kbd "b") #'ibuffer)
+(define-key meta-super-x-map (kbd "i") #'imenu-list)
 
 ;; regions
 ;; @TODO: expand region might be good in repeat mode
