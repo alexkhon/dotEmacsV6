@@ -558,7 +558,9 @@
 ;; Make the current line number more apparent
 ;; - background color matches the "doom-pine" theme
 ;; ---------------------------------------------------------------------------
-(set-face-attribute 'line-number-current-line nil :foreground "#ECEFF4" :background "#0c1501")
+(set-face-attribute 'line-number-current-line nil
+                    :foreground "#ECEFF4"
+                    :background "#0c1501")
 
 
 
