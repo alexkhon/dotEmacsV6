@@ -409,13 +409,6 @@
 
 
 
-;; function to toggle both
-;; ---------------------------------------------------------------------------
-(defun +sidebar-toggle ()
-  "Toggle both `dired-sidebar' and `ibuffer-sidebar'."
-  (interactive)
-  (dired-sidebar-toggle-sidebar)
-  (ibuffer-sidebar-toggle-sidebar))
 
 
 ;; ===========================================================================
@@ -660,12 +653,22 @@
                                 (message "Session did not include a user-init-file")
                                 )))
 
+
+;; function to toggle both
+;; ---------------------------------------------------------------------------
+(defun sidebar-toggle ()
+  "Toggle both 'neotree' and `ibuffer-sidebar'."
+  (interactive)
+  (neotree-toggle)
+  (ibuffer-sidebar-toggle-sidebar))
+
+
 ;; my C-x map
 ;; --------------------------------------------------------------------------------
 (define-prefix-command 'meta-super-x-map)
 (global-set-key (kbd "M-s-x") 'meta-super-x-map)
 
-(define-key meta-super-x-map (kbd "s") #'+sidebar-toggle)
+(define-key meta-super-x-map (kbd "s") #'sidebar-toggle)
 (define-key meta-super-x-map (kbd "w") #'ace-window)
 (define-key meta-super-x-map (kbd "d") #'dired-jump)
 (define-key meta-super-x-map (kbd "b") #'ibuffer)
