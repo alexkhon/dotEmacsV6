@@ -671,11 +671,14 @@
 (define-key meta-super-x-map (kbd "b") #'ibuffer)
 
 ;; regions
+;; @TODO: expand region might be good in repeat mode
 ;; --------------------------------------------------------------------------------
 (define-prefix-command 'meta-super-spc-map)
 (global-set-key (kbd "M-s-SPC") 'meta-super-spc-map)
 
-(define-key meta-super-spc-map (kbd "SPC") #'er/expand-region)
+(define-key meta-super-spc-map (kbd "SPC")     #'er/expand-region)
+(define-key meta-super-spc-map (kbd "M-s-SPC") #'er/expand-region)  ;; fuzzify
+
 (define-key meta-super-spc-map (kbd "p") #'er/mark-inside-pairs)
 (define-key meta-super-spc-map (kbd "P") #'er/mark-outside-pairs)
 (define-key meta-super-spc-map (kbd "q") #'er/mark-inside-quotes)
