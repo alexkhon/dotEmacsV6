@@ -859,3 +859,14 @@
 (setq-default window-divider-default-right-width 2)
 (setq-default window-divider-default-bottom-width 2)
 (window-divider-mode t)
+
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV5/babel/prog-mode.org"))
+;;(org-babel-load-file (expand-file-name "~/Config/dotEmacsV5/babel/prog-python-mode.org"))
+
+;; in c mode
+(global-set-key (kbd "S-<f5>") #'compile)
+;;(global-set-key (kbd "<f5>")   #'flycheck-list-errors)
+(global-set-key (kbd "<f5>")   #'lsp-ui-flycheck-list) ;; on the fly!
+;; need to map this
+;; lsp-ui-imenu 
+;; imenu-list (this might be simpler)
