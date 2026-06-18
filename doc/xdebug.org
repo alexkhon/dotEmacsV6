@@ -1,0 +1,43 @@
+
+
+* [[https://www.agileana.com/blog/how-to-debug-from-a-remote-server-using-xdebug-and-phpstorm/][How to Debug using Xdebug and PHPStorm from a Remote Server]]
+
+** my notes
+1. xdebug on the server
+2. you may need to access the file via a specific port (e.g. in the
+   exmaple below, port 9000)
+
+** You’ll need:
+A remote server (and SSH access to it) An IDE in your machine (I use
+PHPStorm) An issue you need to debug (d’oh!)
+
+** Configure Xdebug
+The Xdebug configuration goes in the php.ini file (or in a specific
+.conf file inside your conf.d folder, it depends on the server’s OS)
+
+#+begin_quote
+xdebug.remote_enable=1 xdebug.remote_connect_back=0
+xdebug.remote_host=localhost xdebug.remote_port=9000
+xdebug.remote_log=/var/log/apache2/xdebug.log
+#+end_quote
+
+** Configure your IDE
+As I said, I’m using PHPStorm, but any IDE configuration should be
+similar.
+
+** Add browser extension
+Now, you’ll need a browser extension that helps you trigger the
+debugger (I use Xdebug helper for Chrome).
+
+** SSH Tunnel into the server
+You need an SSH Tunnel. Since you have SSH access to the server, you
+can create a tunneling protocol
+
+#+begin_quote
+ssh -R 9000:localhost:9000 your_user@your_server_host
+#+end_quote
+
+
+Now your machine will be treated as localhost, and communication can
+happen without issues. You’ll have to open that tunnel every time you
+need to debug remotely to that server.

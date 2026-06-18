@@ -1,0 +1,66 @@
+
+
+
+* UI
+** treemacs
+https://github.com/Alexander-Miller/treemacs
+
+* Snippets
+** yasnippet
+https://github.com/joaotavora/yasnippet
+
+** yasnippet-snippets
+https://github.com/AndreaCrotti/yasnippet-snippets
+
+** yasnippet-capf
+Completion of snippets
+https://github.com/elken/yasnippet-capf
+
+** Note
+*** snippet and completion-at-point clash as they both use the TAB key
+https://emacs.stackexchange.com/questions/66352/how-to-change-key-binding-for-yas-expand
+
+* Region completion
+** corfu
+Corfu enhances in-buffer completion with a small completion popup. 
+https://github.com/minad/corfu
+
+** corfu-terminal
+https://codeberg.org/akib/emacs-corfu-terminal
+
+** cape
+https://github.com/minad/cape
+
+* Fonts and Icons
+** nerd icons
+https://github.com/rainstormstudio/nerd-icons.el
+
+** nerd icons corfu
+https://github.com/LuigiPiucco/nerd-icons-corfu
+
+** nerd fonts
+https://github.com/ryanoasis/nerd-fonts
+https://www.nerdfonts.com/font-downloads
+
+
+* Take a look
+** org-journal
+https://github.com/bastibe/org-journal
+
+** org-crypt
+https://orgmode.org/manual/Org-Crypt.html
+
+** easyPG (encryption)
+https://www.gnu.org/software/emacs/manual/html_node/epa/index.html#Top
+
+* Org-mode
+** docs
+*** https://github.com/nickanderson/Level-up-your-notes-with-Org/blob/master/Level-up-your-notes-with-Org.org
+
+*** https://howardism.org/Technical/Emacs/literate-programming-tutorial.html
+This is an awesome doc
+
+** Org-mode additional tools
+https://orgmode.org/worg/org-contrib/
+
+

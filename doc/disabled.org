@@ -1,0 +1,28 @@
+
+* disable-mouse
+Sometimes the mouse is useful. Need to disable more selectively.
+
+#+begin_src emacs-lisp
+  ;; disable mouse
+  ;; ---------------------------------------------------------------------------
+  ;; (use-package disable-mouse
+  ;;   :config
+  ;;   (global-disable-mouse-mode)
+  ;; )
+  #+end_src
+
+* nano https://github.com/rougier/nano-emacs
+- nice theme, but needs work
+  - option key nolonger works
+  - function keys got remapped
+    
+#+begin_src emacs-lisp
+;; NANO
+;; ---------------------------------------------------------------------------
+(straight-use-package
+ '(nano :type git :host github :repo "rougier/nano-emacs"))
+
+(setq nano-font-family-monospaced "Roboto Mono")
+(setq nano-font-family-proportional nil)
+(setq nano-font-size 14)
+#+end_src

@@ -1,0 +1,15 @@
+* https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-R.html
+
+R source code blocks in Org Mode require a working R installation.
+
+You also need to ensure that org-babel-load-languages includes an
+entry for R.
+#+begin_src emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((R . t)))
+#+end_src
+
+There are no R-specific default header arguments.
+
+See the page in the header about generating output in org-mode

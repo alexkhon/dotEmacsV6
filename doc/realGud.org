@@ -1,0 +1,16 @@
+* https://github.com/realgud/realgud/
+
+* https://github.com/realgud/realgud/wiki/Debuggers-Available
+Debuggers of interest
+
+| Name     | Language(s)  | Invocation       | Notes                                                                                             |
+|----------+--------------+------------------+---------------------------------------------------------------------------------------------------|
+| bashdb   | bash         | realgud:bashdb   | bash debugger. See bash notes.                                                                    |
+| gdb      | multiple     | realgud:gdb      | See also gdb-notes.                                                                               |
+| pdb      | Python       | realgud:pdb      | Stock CPython debugger ; trepan2. or trepan3k works better with realgud. See also pdb-ipdb-notes. |
+| remake   | GNU Make     | realgud:remake   | For GNU Make.                                                                                     |
+| trepanjs | nodejs <= v6 | realgud:trepanjs | a more gdb-like debugger for nodejs. However as of node v.8.5.8 this protocol is obsolete         |
+| trepan2  | CPython 2    | realgud:trepan2  | Python 2 trepanning debugger for python 2.5-2.7                                                   |
+| trepan3k | CPython 3    | realgud:trepan3k | Python 3 trepanning debugger                                                                      |
+| xdebug   | PHP          | realgud:xdebug   | xdebug cli debugger                                                                               |
+| zshdb    | zsh          | realgud:zshdb    | Zsh                                                                                               |

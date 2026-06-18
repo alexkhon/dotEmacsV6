@@ -1,0 +1,4 @@
+* ~/.authinfo
+Tramp will prompt if emacs should store the login info in the
+.authinfo file. This file is stored as clear text.
+

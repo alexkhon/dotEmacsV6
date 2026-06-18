@@ -1,0 +1,191 @@
+* General
+https://github.com/emacs-tw/awesome-emacs
+
+* treemacs
+** Show only the current project and always follow project
+(treemacs-display-current-project-exclusively)
+(treemacs-project-follow-mode)
+
+* window indicator
+** https://tech.toryanderson.com/2021/09/24/replacing-beacon.el-with-hl-line-flash/
+
+* copy file name to use as a link
+** go to file and copy file name (put into kill ring)
+(kill-new (buffer-file-name))
+** go to destinastion and post link
+C-c C-l
+
+* org-mode customize the functions
+** https://superuser.com/questions/828713/how-to-override-a-keybinding-in-emacs-org-mode
+** eval-after-load
+#+begin_src emacs-lisp
+  (define-key org-mode-map (kbd "<M-S-up>") nil)
+  (define-key org-mode-map (kbd "<M-S-down>") nil)
+  (define-key org-mode-map (kbd "<M-up>") nil)
+  (define-key org-mode-map (kbd "<M-down>") nil)
+  (define-key org-mode-map (kbd "<M-S-left>") nil)
+  (define-key org-mode-map (kbd "<M-S-right>") nil)
+  (define-key org-mode-map (kbd "<M-left>") nil)
+  (define-key org-mode-map (kbd "<S-left>") nil)
+  (define-key org-mode-map (kbd "<S-right>") nil)
+  (define-key org-mode-map (kbd "<S-up>") nil)
+  (define-key org-mode-map (kbd "<S-down>") nil)
+  (define-key org-mode-map (kbd "<M-right>") nil) 
+  (define-key org-mode-map (kbd "C-<tab>") nil)
+  (define-key org-mode-map (kbd "C-S-<tab>") nil)
+  (define-key org-mode-map (kbd "<C-up>") nil)
+  (define-key org-mode-map (kbd "<C-down>") nil)
+#+end_src
+
+* map a key for toggling links in org-mode
+org-toggle-link-display
+
+* map a key to insert the current buffer name
+M-:
+(insert (buffer-name))
+
+* org-lint
+Consider using lint for all coding, and for org-mode
+https://emacs.stackexchange.com/questions/42196/how-to-call-org-lint-against-org-mode-file-from-command-line
+
+* dap-mode
+https://emacs-lsp.github.io/dap-mode/
+
+* map a key to insert shell output into buffer
+https://stackoverflow.com/questions/12292239/insert-the-output-of-shell-command-into-emacs-buffer
+C-u M-! <shell-command>
+
+* repeating buffer command
+C-x z
+
+* repeating complex commands
+C-x ESC ESC
+
+* indent the whole file
+C-x h
+C-M-\
+
+* programmatically remove all the empty lines (not always advisable!)
+(flush-lines "^$" (point-min) (point-max))
+
+* programmatically add a blank line before each level 1 headers
+replace-regexp ^\*<SPC> -> ^Q^J*<SPC>
+
+* themes
+https://github.com/ogdenwebb/emacs-kaolin-themes?tab=readme-ov-file
+
+* tree-sitter (coding)
+using tree-sitter will allow you to highlight syntatic structures like functions and loops
+** references
+https://www.masteringemacs.org/article/how-to-get-started-tree-sitter
+https://emacs-tree-sitter.github.io/installation/
+
+* Dictionary
+https://www.masteringemacs.org/article/wordsmithing-in-emacs
+https://github.com/xuchunyang/osx-dictionary.el
+
+* Reading ePub and PDF
+https://lucidmanager.org/productivity/reading-ebooks-with-emacs/
+https://medium.com/@gmd8sq/how-to-take-notes-with-emacs-19800eedd5d5
+
+* programmaically copy buffer full path
+(kill-new (buffer-file-name))
+
+* Consider using dired, dired+, and sunrise commander
+https://www.emacswiki.org/emacs/DiredPlus
+https://www.emacswiki.org/emacs/Sunrise_Commander
+
+* agenda customization
+http://doc.endlessparentheses.com/Var/org-agenda-prefix-format.html
+https://github.com/alphapapa/org-super-agenda/blob/master/examples.org#apply-faces-and-transformations=
+https://github.com/psamim/dotfiles/blob/master/doom/config.el#L73
+
+* using grep to find files
+find-grep-dired
+** might need to preview again
+https://github.com/protesilaos/dired-preview
+
+** Update time stamps for migrated entries
+C-u C-u C-c .
+
+* org-pomodoro timer set up
+https://systemcrafters.net/emacs-shorts/pomodoro-timer/
+
+* rename the file of an open buffer
+https://janusworx.com/work/rename-a-file-as-you-work-on-it-in-emacs/
+** per the author
+1. Hit C-x d to flip into a dired buffer
+2. Find my filename in the list. (C-s can help search and narrow stuff)
+3. Then C-x C-q to go into Wdired mode
+4. Change the file name to whatever I want it to
+5. C-c C-c to be done with it.
+** simplified 1
+1. dired-jump (go to the entry of the current file)
+2. C-x C-q (modify the name in dired)
+3. C-c C-c to finish
+** simplified 2
+1. dired-jump (go to the entry of the current file)
+2. hit R (you have to type a new name)
+3. C-c C-c to finish
+
+* diredc (midnight commander)
+https://github.com/Boruch-Baum/emacs-diredc
+
+* dired-git
+https://github.com/conao3/dired-git.el
+
+* repeat-mode
+https://karthinks.com/software/it-bears-repeating/
+https://whatacold.io/blog/2023-11-19-emacs-winner-mode/
+
+* latex preview
+https://emacs.stackexchange.com/questions/21206/latex-rendering-and-details
+https://orgmode.org/manual/LaTeX-fragments.html
+
+* ignoring certain file with find-file
+https://emacs.stackexchange.com/questions/29914/how-to-ignore-certain-filename-patterns-in-find-file-counsel-find-file
+** .DS_Store
+Add .DS_Store to this variable: completion-ignored-extensions
+
+* annotate-mode (for annotating text files)
+1. be sure to change the DB for each file
+2. write some code to save the notes in ./notes/buffer-name.notes
+
+* multiple emacs daemons
+https://tychoish.com/post/running-multiple-emacs-daemons-on-a-single-system/
+
+* completion exceptions
+move the current exceptions to
+
+(setq completion-ignored-extensions
+      (append completion-ignored-extensions
+              (quote
+               (".o" ".aux"))))
+
+* org-content
+C-2 M-x org-content
+
+* whitespace clean up
+M-x flush-lines
+M-x delete-trailing-whitespace
+
+* beautify org-mode
+https://mstempl.netlify.app/post/beautify-org-mode/
+
+
+* mark down mode
+** live preview on browser
+https://github.com/shime/emacs-livedown
+
+** [FAIL] Maybe via EAF and the browser - EAF slow and does not navigate
+
+https://github.com/emacs-eaf/eaf-browser
+
+*** eaf code
+(add-to-list 'load-path "~/.emacs.d/emacs-application-framework/")
+(require 'eaf)
+(require 'eaf-browser)
+(require 'eaf-pdf-viewer)
+
+* org-ql (query language for org mode)
+https://github.com/alphapapa/org-ql

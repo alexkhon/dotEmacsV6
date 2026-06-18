@@ -1,0 +1,46 @@
+* basic workflow
+1. Use tramp to login to remote
+2. Create a new shell
+3. Create a second shell Ctrl + u Alt + x shell
+4. C-x C-f from the shell to edit a file in that directory (!)
+
+* edit a file with sudo [no working]
+** https://www.cocode.se/emacs/tramp.html
+/ssh:user@192.168.8.5|sudo:root@192.168.8.5:/etc/passwd
+
+* todo
+1. default the location of the shell (use bash)
+
+* https://www.gnu.org/software/emacs/manual/html_node/emacs/Term-Mode.html
+
+** C-c C-j
+Switch to line mode (term-line-mode). Do nothing if already in line
+mode.
+
+** C-c C-k
+Switch to char mode (term-char-mode). Do nothing if already in char
+mode.
+
+The following commands are only available in char mode:
+
+*** C-c C-c
+Send a literal C-c to the sub-shell (term-interrupt-subjob).
+
+*** C-c char
+This is equivalent to C-x char in normal Emacs.
+
+For example, C-c o invokes the global binding of C-x o, which is
+normally ‘other-window’.
+
+** C-c C-q (page-at-a-time)
+Term mode has a page-at-a-time feature. When enabled, it makes output
+pause at the end of each screenful:
+
+Toggle the page-at-a-time feature (term-pager-toggle).
+
+This command works in both line and char modes. When the feature is
+enabled, the mode-line displays the word ‘page’, and each time Term
+receives more than a screenful of output, it pauses and displays
+‘**MORE**’ in the mode-line. Type SPC to display the next screenful of
+output, or ? to see your other options. The interface is similar to
+the more program.
