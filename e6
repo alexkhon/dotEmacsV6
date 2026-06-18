@@ -2,10 +2,10 @@
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # ...
-    /usr/bin/emacs -q -l ./mini.el --debug-init
+    /usr/bin/emacs -q -l ./init.el --debug-init
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
-    /Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -q -l ./mini.el --debug-init
+    /Applications/MacPorts/Emacs.app/Contents/MacOS/Emacs -q -l ./init.el --debug-init
 fi
 
 
