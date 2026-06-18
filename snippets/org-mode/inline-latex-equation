@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: codeblock-latex
+# key: \le
+# --
+\begin{equation}
+$1
+\end{equation}

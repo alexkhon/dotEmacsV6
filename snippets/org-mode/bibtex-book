@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: bibtex book
+# key: @book
+# --
+@book{$1,
+  author    = "$2",
+  title     = "$3",
+  publisher = "$4",
+  address   = "$5",
+  year      = $6
+}

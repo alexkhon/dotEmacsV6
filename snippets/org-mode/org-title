@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: org title
+# key: \title
+# --
+#+TITLE:     ${1:`(buffer-name)`}
+#+DATE:      ${2:`(format-time-string "%Y-%m-%d" (current-time))`}
+#+EMAIL:     alex.k.hon@outlook.com
+#+AUTHOR:    Alex K. Hon
+#+OPTIONS:   ^:{}
+#+STARTUP:   overview

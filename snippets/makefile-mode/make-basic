@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: basic makefile using clang
+# key: \make
+# --
+
+# the compiler: clang
+CC = gcc
+
+# compiler flags: -g adds debugging info, -Wall turns on warnings
+CFLAGS = -g -Wall
+
+# the build target executable name
+TARGET = $1
+
+all: $(TARGET)
+
+$(TARGET): $(TARGET).c
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
+
+clean:
+	rm -f $(TARGET)

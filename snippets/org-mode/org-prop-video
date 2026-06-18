@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: org-mode property video
+# key: @v
+# --
+:PROPERTIES:
+:title:
+:authors:
+:source:
+:category:
+:datetime-publication:
+:datetime-updated:
+:datetime-accessed:
+:END:

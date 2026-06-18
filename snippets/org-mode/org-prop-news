@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: org-mode property news
+# key: @n
+# --
+:PROPERTIES:
+:title:
+:authors:
+:source:
+:category:
+:datetime-publication:
+:datetime-updated:
+:datetime-accessed:
+:END:

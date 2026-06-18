@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: bibtex online
+# key: @online
+# --
+@online{$1,
+    author = "$2",
+    title = "$3",
+    url  = "$4",
+    addendum = "(accessed: $5)",
+    keywords = "$6"
+}

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: bibtex article
+# key: @article
+# --
+@article{CitekeyArticle,
+  author   = "$1",
+  title    = "$2",
+  journal  = "$3",
+  year     = $4,
+  volume   = "$5",
+  number   = "$6",
+  pages    = "$7--$8",
+}

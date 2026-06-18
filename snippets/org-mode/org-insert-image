@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org-jrnl insert image
+# key: \img
+# --
+#+CAPTION: $1
+#+ATTR_ORG: :width 250 :align left
+[[./photos/$2]]

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: c with tangle
+# key: \code
+# --
+#+begin_src c :tangle $1
+$0
+#+end_src

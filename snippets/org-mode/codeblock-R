@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: R
+# key: \code
+# --
+#+begin_src R
+$0
+#+end_src
