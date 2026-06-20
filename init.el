@@ -157,6 +157,9 @@
 ;; ---------------------------------------------------------------------------
 (setq org-startup-indented t)
 
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/org-mode.org"))
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/org-jrnl.org"))
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/org-keys.org"))
 
 ;; ===========================================================================
 ;; markdown packages
