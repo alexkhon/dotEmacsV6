@@ -1,0 +1,133 @@
+#+TITLE:     prog-python-mode.org
+#+EMAIL:     alex.k.hon@outlook.com
+#+AUTHOR:    Alex K. Hon
+#+OPTIONS:   ^:{}
+#+STARTUP:   overview
+
+* Summary
+1. Assume you are using python virtual environments
+   - $ source ./venv/bin/activate
+   - (.venv) $ pip install <package>
+
+
+
+* elpy
+https://elpy.readthedocs.io/en/latest/introduction.html
+Load elpy only in python-mode
+
+#+begin_src emacs-lisp
+  (use-package elpy
+    :ensure t
+    :defer t
+    :init
+    (advice-add 'python-mode :before 'elpy-enable))
+#+end_src
+
+** elpy-check
+
+one or both are needed to render ASCII colors
+
+#+begin_src emacs-lisp
+;; For Elpy's Python REPL / comint buffers
+(add-hook 'inferior-python-mode-hook
+          (lambda ()
+            (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)))
+
+
+    ;; For compilation buffers
+(add-hook 'compilation-filter-hook 'ansi-color-compilation-filter)
+#+end_src
+
+
+* pyenv-mode
+
+https://github.com/pythonic-emacs/pyenv-mode
+
+M-x pyvenv-activate
+select the .venv directory
+
+
+#+begin_src emacs-lisp
+(use-package pyvenv
+  :ensure t
+  :config
+  (pyvenv-mode t))
+#+end_src
+
+
+* auto virtual environments
+
+- no evidence that this is working 
+
+#+begin_src emacs-lisp
+(use-package auto-virtualenv
+  :ensure t
+  :init
+  (add-hook 'python-mode-hook 'auto-virtualenv-setup))
+#+end_src
+
+
+* black
+** be sure you have the latest version of black
+$ pip install --upgrade black
+
+** be sure the indentation is correct
+- black does not fix incorrectly indented code
+- it just returns an error
+
+** code
+#+begin_src emacs-lisp
+  (use-package python-black
+    :demand t
+    :after python
+    :hook (python-mode . python-black-on-save-mode-enable-dwim))
+#+end_src
+
+* linting: pep8 flake8
+
+- without setting the virtual environment, the program is not detected
+
+** flake8
+"Flake8 is a command-line tool that automates the checking
+process. Instead of reading through your code manually to see if you
+violated the PEP 8 guidelines, you can run Flake8 on your files, and
+it will output a list of errors with line numbers"
+
+** pep8
+"PEP 8 (Python Enhancement Proposal 8) is a written document that
+dictates best practices for how Python code should be formatted."
+
+** references
+https://shivdeepak.com/posts/linting-in-python/
+
+** install python packages
+pip install flake8
+pip install pep8
+
+** py-autopep8
+#+begin_src emacs-lisp
+(use-package py-autopep8
+  :ensure t
+  )
+
+#+end_src
+
+* code
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-ts-mode))
+
+(add-hook 'python-ts-mode-hook
+	    (lambda ()
+	      (highlight-indent-guides-mode)
+          (flycheck-mode)
+	      ))
+
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+;; ignore doxygen comments
+;; this modifies only M-x python-check
+(setq python-check-command "flake8 --ignore=E266")
+#+END_SRC

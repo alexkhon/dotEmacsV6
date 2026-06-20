@@ -1,0 +1,32 @@
+* Referencs
+https://www.howardism.org/Technical/Emacs/journaling-org.html
+
+
+* Set Today as filename
+#+begin_src emacs-lisp
+  (defun get-journal-file-today ()
+    "Return filename for today's journal entry."
+    (let ((daily-name (format-time-string "%Y%m%d")))
+      (expand-file-name (concat org-journal-dir daily-name))))
+#+end_src
+
+* Find todays file and insert
+#+begin_src emacs-lisp :tangle yes
+  (defun journal-file-today ()
+    "Create and load a journal file based on today's date."
+    (interactive)
+    (find-file (get-journal-file-today)))
+#+end_src
+
+
+* Capture
+#+begin_src emacs-lisp
+(setq org-capture-templates '(
+    ;; ...
+    ("j" "Journal Note"
+         entry (file (get-journal-file-today))
+         "* Event: %?\n\n  %i\n\n  From: %a"
+         :empty-lines 1)
+    ;; ..
+))
+#+end_src

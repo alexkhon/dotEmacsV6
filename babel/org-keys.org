@@ -1,0 +1,113 @@
+#+TITLE:     org-keys.org
+#+EMAIL:     alex.k.hon@outlook.com
+#+AUTHOR:    Alex K. Hon
+#+OPTIONS:   ^:{}
+#+STARTUP:   overview
+
+* keybindings - set to <f2>
+See: https://www.emacswiki.org/emacs/PrefixKey
+
+#+BEGIN_SRC emacs-lisp
+(define-prefix-command 'org-keys-map)
+(global-set-key (kbd "<f2>") 'org-keys-map)
+
+(define-key org-keys-map (kbd "<f2>") #'org-jrnl-open-today-file)
+(define-key org-keys-map (kbd "j")    #'org-jrnl-create-new-entry)
+(define-key org-keys-map (kbd "z")    #'org-ztkn-create-new-entry)
+;; to map a key to a function with a paramter, use a lamda function
+;;(define-key org-keys-map (kbd "p")	(lambda () (interactive) (org-jrnl-goto-day "prev")))
+;;(define-key org-keys-map (kbd "n")	(lambda () (interactive) (org-jrnl-goto-day "next")))
+;; used wrapper instead
+(define-key org-keys-map (kbd "p")	#'org-jrnl-goto-day-prev)
+(define-key org-keys-map (kbd "n")	#'org-jrnl-goto-day-next)
+
+(define-key org-keys-map (kbd "r")    #'org-roam-capture)
+#+END_SRC
+
+* org subtype
+#+BEGIN_SRC emacs-lisp
+  ;; For org-mode file, determine what type of org file it is
+  ;; -----------------------------
+  (setq myOrgSubType nil) ;; default value
+  (make-local-variable 'myOrgSubType) ;; give each buffer own setting
+
+  ;; Function to set org-mode subtype
+  ;; -----------------------------
+  ;;  (defun akh-set-myOrgSubType-variable ()
+  ;;    "Grabs the level 2 extension. Currently: jrnl, note, ztkn"
+  ;;    (progn
+  ;;      (if (derived-mode-p 'org-mode)
+  ;;          (progn
+  ;;            (setq myOrgSubType (file-name-extension (file-name-sans-extension (buffer-file-name))))
+  ;;            ;; (message "myOrgSubType is %s" myOrgSubType)
+  ;;            )
+  ;;        (progn
+  ;;          (setq myOrgSubType nil)
+  ;;          ;; (message "myOrgSubtype is %s" myOrgSubType)
+  ;;          ))))
+
+  (defun akh-set-myOrgSubType-variable ()
+    "Grabs the level 2 extension. Currently: jrnl, note, ztkn"
+    (progn
+      ;; by default, it is set to nil
+      (if (derived-mode-p 'org-mode)
+          ;; if we are in org-mode
+          (if (buffer-file-name)
+              ;; if the buffer has a filename, not *scratch*
+              (if (string= (file-name-extension (buffer-file-name)) "org")
+                  ;; if this is a .org file
+                  (setq myOrgSubType (file-name-extension (file-name-sans-extension (buffer-file-name))))
+                )))))
+
+    ;; manually set the org subtype
+    ;; -----------------------------
+    (defun akh-update-myOrgSubType-variable ()
+      (interactive)
+      (akh-set-myOrgSubType-variable)
+      )
+
+    ;; rebind the enter key based on org subtype only for .org files
+    ;; C-RET does not bind in a terminal
+    ;; -----------------------------
+    (defun akh-set-myOrgSubType-keybindings ()
+      ;; This will allow us to overload the return key for different org subtypes
+      ;; https://stackoverflow.com/questions/13945782/emacs-auto-minor-mode-based-on-extension
+      (progn
+        (when (derived-mode-p 'org-mode)
+          (progn
+            (cond
+             ((string= myOrgSubType "jrnl")
+              (progn
+                (local-set-key (kbd "C-RET")  #'org-jrnl-create-new-entry)
+                (local-set-key (kbd "M-RET")  #'org-meta-return)
+  	      ;; -----
+                (local-set-key (kbd "C-<return>")  #'org-jrnl-create-new-entry)
+                (local-set-key (kbd "M-<return>")  #'org-meta-return)
+                ))
+             ((or (string= myOrgSubType "ztkn") (string= myOrgSubType "notes"))
+              (progn
+                (local-set-key (kbd "C-RET")  #'org-ztkn-create-new-entry)
+                (local-set-key (kbd "M-RET")  #'org-meta-return)
+  	      ;; -----
+                (local-set-key (kbd "C-<return>")  #'org-ztkn-create-new-entry)
+                (local-set-key (kbd "M-<return>")  #'org-meta-return)
+                ))
+             (t
+              (progn
+                (local-set-key (kbd "C-RET")  #'org-insert-heading-respect-content)
+                (local-set-key (kbd "M-RET")  #'org-meta-return)
+  	      ;; -----
+                (local-set-key (kbd "C-<return>")  #'org-insert-heading-respect-content)
+                (local-set-key (kbd "M-<return>")  #'org-meta-return)
+                ))
+             )))))
+
+  ;; auto execute the function on buffer change
+  ;; - This will execute when you engage the minibuffer
+  ;; -----------------------------
+  (add-hook 'window-configuration-change-hook
+            (lambda()
+              (akh-set-myOrgSubType-variable)
+              (akh-set-myOrgSubType-keybindings)
+              ))
+#+END_SRC

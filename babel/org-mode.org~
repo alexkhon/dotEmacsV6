@@ -1,0 +1,127 @@
+* functions
+** show content level
+
+#+BEGIN_SRC emacs-lisp
+  ;; Display only the outline
+  ;; https://stackoverflow.com/questions/6198339/show-org-mode-outline-up-to-a-certain-heading-level
+  ;; http://xahlee.info/emacs/emacs/elisp_idioms_prompting_input.html
+  ;; -----------------------------
+  (defun akh-org-show-content-level ()
+    "Prompt user for the org-mode level to display."
+    (interactive)
+    (setq n (read-number "Type a number: " 1))
+    (if (= n 1)
+        (org-overview)
+      (org-content n)
+      ))
+#+END_SRC
+
+** set org-agenda to the month of the current file
+
+#+begin_src emacs-lisp
+  (defun akh-org-agenda-current-file-month ()
+    "Set the agenda directory to the current file's month"
+    (interactive)
+    (setq org-directory (file-name-directory (buffer-file-name)))
+    (setq org-agenda-files (list org-directory))
+    (org-agenda)
+    )
+#+end_src
+
+* variables
+** org-agenda display
+*** notes
+1. The %i sets a category icon
+2. for simplicity, the agenda has no icon display
+3. see below for notes on setting the category and the icon
+*** code
+#+begin_src emacs-lisp
+(setq org-agenda-prefix-format
+'(
+(agenda . " %t%s")
+(todo . " %-12:c")
+(tags . " %i %-12:c")
+(search . " %i %-12:c")))
+
+#+end_src
+
+** org tags
+*** code
+#+BEGIN_SRC emacs-lisp
+(setq org-tag-alist '(
+                      ("EXPENSE" . ?e)
+                      ("GYM"     . ?g)
+                      ("JUDO"    . ?j)
+                      ("MOOD"    . ?m)
+                      ("TEXT"    . ?t)
+                      ))
+#+END_SRC
+
+** org todo
+*** notes
+1. Default journal entries are not items that are TODO and uses the
+   "----" keyword. In order for the theme not to color the entire line
+   as a "DONE" item, you need to put it in the active category.
+*** code
+#+BEGIN_SRC emacs-lisp
+  (setq org-todo-keywords '(
+                            (sequence
+                             "TODO(t!)" "WAIT(w@/!)" "INPR(i!)" "----(-)" "|"
+                             "BEGN(b)" "WRKG(g)" "DONE(d!)" "MIGR(m@/!)" "CXLD(c@/!)" "XPIR(x!)"
+                             )))
+#+END_SRC
+
+** do not fontify the completed todo items
+*** notes
+Current theme grays out the bullet for "done" items.  This does not
+look right for my bullet journal.
+*** code
+#+begin_src emacs-lisp
+  (setq org-fontify-done-headline nil)
+#+end_src
+
+** org-ellipsis
+#+BEGIN_SRC emacs-lisp
+  (setq org-ellipsis " ↴")
+#+END_SRC
+
+** allow image resizing in org-mode
+org-image-actual-width - set this to nil so that you can resize it inline
+
+#+begin_src emacs-lisp
+  (setq org-image-actual-width nil)  ;; make images re-sizable
+#+end_src
+
+* org-agenda categories and icons
+** setting a category
+*** my-org-journal-entry
+:PROPERTIES:
+:CATEGORY: ABC
+:END:
+** display category icon in agenda
+*** set this variable (this is the default)
+(setq org-agenda-prefix-format
+'(
+(agenda . " %i %-12:c%?-12t% s")
+(todo . " %i %-12:c")
+(tags . " %i %-12:c")
+(search . " %i %-12:c")))
+*** set this variable
+(setq org-agenda-category-icon-alist
+ '(
+   ("ABC" "~/Config/dotEmacsV5/assets/icons/usd-circle.svg" nil nil :ascent center :mask heuristic)
+   ))
+*** free icons
+https://www.flaticon.com
+https://fonts.google.com/icons?icon.size=24&icon.color=%23e8eaed
+*** Notes
+- The google site allow you to set the SVG size to 16, which works well. But, it does not resize
+- A reddit post suggests that you can use all-the-icons. This option may allow you to reszie
+
+** org-src code
+#+begin_src emacs-lisp
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 0)
+#+end_src
+

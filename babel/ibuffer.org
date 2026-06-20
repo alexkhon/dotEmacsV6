@@ -1,0 +1,71 @@
+* ref
+https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/
+http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html
+https://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet/
+
+* grouping
+#+begin_src emacs-lisp
+;; Don't show empty groups
+(setq ibuffer-show-empty-filter-groups nil)
+
+;; Define default groups
+(setq ibuffer-saved-filter-groups
+      (quote (("default"
+               ("dired"    (mode . dired-mode))
+               ("journal"  (name . ".jrnl.org$"))
+               ("org"      (name . ".org$"))
+               ("markdown" (or
+                            (name . ".md$")
+                            (name . "markdown$")))
+               ("txt"      (name . ".txt$"))
+               ("magit"    (name . "^magit"))
+               ("code"     (or
+			    (mode . lisp-mode)
+                            (mode . python-mode)
+                            (mode . c++-mode)
+			    (mode . c-mode)
+			    (mode . makefile-mode)))
+               ("planner"  (or
+                            (name . "^\\*Calendar\\*$")
+                            (name . "^\\*Org Agenda\\*")))
+               ("emacs"    (or
+                            (name . "^\\*scratch\\*$")
+                            (name . "^\\*Messages\\*$")
+                            (name . "^\\*Help\\*$")))))))
+
+(add-hook 'ibuffer-mode-hook
+	  (lambda ()
+	    (ibuffer-switch-to-saved-filter-groups "default")))
+
+#+end_src
+
+* column width
+https://stackoverflow.com/questions/26062169/increase-buffer-column-width-in-buffer-list-view
+https://emacs.stackexchange.com/questions/620/set-column-widths-in-ibuffer
+
+#+begin_src emacs-lisp
+  (setq ibuffer-formats
+        '((mark modified read-only " "
+                (name 30 30 :left :elide) ; change: 30s were originally 18s
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename)))
+
+#+end_src
+
+* ibuffer sidebar
+https://github.com/jojojames/ibuffer-sidebar
+
+#+begin_src emacs-lisp
+  (use-package ibuffer-sidebar
+    :ensure nil
+    :commands (ibuffer-sidebar-toggle-sidebar)
+    :config
+    (setq ibuffer-sidebar-use-custom-font t)
+    (setq ibuffer-sidebar-face `(:family "Helvetica" :height 140)))
+#+end_src

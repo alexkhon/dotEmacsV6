@@ -1,0 +1,126 @@
+#+TITLE:     prog-mode.org
+#+EMAIL:     alex.k.hon@outlook.com
+#+AUTHOR:    Alex K. Hon
+#+OPTIONS:   ^:{}
+#+STARTUP:   overview
+
+
+* Summary
+1. common packages used in programming
+   
+* highlight-indent-guides
+https://github.com/DarthFennec/highlight-indent-guides
+#+BEGIN_SRC emacs-lisp
+  (straight-use-package 'highlight-indent-guides)
+  (use-package highlight-indent-guides
+    :config
+    (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+    )
+#+END_SRC
+
+* flycheck
+#+begin_src emacs-lisp
+(use-package flycheck
+  ;; use for on the fly linting and spellchecking
+  ;; M-x flymake-show-diagnostics-buffer
+  :config
+  (add-hook 'sh-mode-hook   'flycheck-mode)
+  (add-hook 'lisp-mode-hook 'flycheck-mode)
+  (add-hook 'c-mode-hook    'flymake-mode)
+  )
+
+
+;; move the next lines to python-mode
+;; (setq flycheck-python-flake8-executable
+;;       (expand-file-name "flake8" "/Users/alex/Library/Python/3.13/bin/flake8"))
+#+end_src
+
+* treesitter
+- Treesitter rapidly builds a tree of your program's structure
+  - even if it's incomplete
+  - even if it contains errors
+  - will build the tree in parts
+- It is like a DEV time compiler
+  - use it to catch syntax errors
+  - use it for syntax color coding
+
+* language server
+- lsp does what treesitter does and adds additional functions
+  - documentation
+  - project integration
+    
+** notes
+*** Python: python-lsp-server
+
+$ pip install python-lsp-server[all]
+
+$ pylsp --help
+
+*** PHP
+https://intelephense.com
+https://medium.com/@gayanhewa/php-with-lsp-mode-on-emacs-1738db957448
+
+$ sudo npm i -g intelephense
+
+** lsp-mode
+- integration with Language Servers like Intelephense by default
+
+https://github.com/emacs-lsp/lsp-mode
+https://github.com/emacs-php/php-mode/wiki/LSP-Support
+
+https://emacs-lsp.github.io/lsp-mode/tutorials/CPP-guide/
+
+To use Corfu as your completion UI with lsp-mode, you must tell
+lsp-mode to stop managing company-mode and allow Emacs's native
+completion-at-point-functions (Capf) to handle the candidates.
+
+#+begin_src emacs-lisp
+(use-package lsp-mode
+  ;; emacs interface to a language server
+  :commands lsp
+  
+  :init
+  ;; Tell lsp-mode not to configure company-mode automatically
+  (setq lsp-completion-provider :none)
+  :config
+  ;; Optional: Force orderless or standard filtering on lsp completions
+  (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults)) 
+        '(orderless basic))
+
+  ;; default is lsp kep is s-l
+  (lsp-enable-which-key-integration t)
+  
+  :hook
+  (sh-mode .        lsp-deferred)
+  (c-mode  .        lsp-deferred)
+  (c++-mode .       lsp-deferred)
+  (lisp-mode .      lsp-deferred)
+  (python-mode .    lsp-deferred)
+  (python-ts-mode . lsp-deferred)
+  )
+#+end_src
+
+
+** lsp-ui
+https://emacs-lsp.github.io/lsp-ui/
+https://github.com/emacs-lsp/lsp-ui
+- provides a rich IDE-like interface for GUI Emacs
+#+begin_src emacs-lisp
+(use-package lsp-ui
+ :requires lsp-mode flycheck
+ :config
+ (setq lsp-ui-doc-enable t
+ lsp-ui-doc-use-childframe t
+ lsp-ui-doc-position 'top
+ lsp-ui-doc-include-signature t
+ lsp-ui-sideline-enable nil
+ lsp-ui-flycheck-enable t
+ lsp-ui-flycheck-list-position 'right
+ lsp-ui-flycheck-live-reporting t
+ lsp-ui-peek-enable t
+ lsp-ui-peek-list-width 60
+ lsp-ui-peek-peek-height 25
+ lsp-ui-sideline-enable nil)
+(add-hook 'lsp-mode-hook 'lsp-ui-mode))
+#+end_src

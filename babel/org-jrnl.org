@@ -1,0 +1,202 @@
+#+TITLE:     org-jrnl.org
+#+EMAIL:     alex.k.hon@outlook.com
+#+AUTHOR:    Alex K. Hon
+#+OPTIONS:   ^:{}
+#+STARTUP:   overview
+
+* Set dependent packages
+1. s.el is a package for string manipulation
+
+#+BEGIN_SRC emacs-lisp
+  (straight-use-package 's)
+  (use-package s)
+#+END_SRC
+
+* Set journal location
+1. This should be set up as an emacs option
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-jrnl-journal-location "~/Journal")
+#+END_SRC
+
+* Set the path for today's file
+1. Save only variables that are needed globally
+2. Use let to define the tmp vars
+
+#+BEGIN_SRC emacs-lisp
+  (defun org-jrnl-init-vars ()
+    "Set the journal filepath based on today's date"
+
+    (setq org-jrnl-today (format-time-string "%Y-%m-%d.%a"))
+    (setq tmp (s-split "-" org-jrnl-today))
+
+    (setq org-jrnl-today-year       (nth 0 tmp))
+    (setq org-jrnl-today-year-month (concat org-jrnl-today-year "-" (nth 1 tmp)))
+    (setq org-jrnl-today-file       (concat org-jrnl-today ".jrnl.org"))
+
+    (setq org-jrnl-today-filepath
+  	(concat org-jrnl-journal-location "/"
+    		org-jrnl-today-year "/"
+    		org-jrnl-today-year-month "/"
+    		org-jrnl-today-file)))
+#+END_SRC
+
+* Getting the today's bullet journal
+#+BEGIN_SRC emacs-lisp
+  (defun org-jrnl-open-today-file ()
+    "Open a journal file based on today's date"
+    (interactive)
+
+    ;; just in case the variable has not been initialized
+    (when (not (boundp 'org-jrnl-today-filepath)) (org-jrnl-init-vars))
+
+    ;; if initialized to an old date because emacs has been running for a while
+    (when (not (string= org-jrnl-today (format-time-string "%Y-%m-%d.%a"))) (org-jrnl-init-vars))
+
+    ;; open the file
+    (find-file org-jrnl-today-filepath))
+
+#+END_SRC
+
+* Create new journal entry
+See: https://emacs.stackexchange.com/questions/36944/key-binding-to-invoke-more-than-two-commands
+#+BEGIN_SRC emacs-lisp
+  (defun org-jrnl-create-new-entry ()
+    "Run 'insert a new bullet' and 'insert time' in sequence."
+    (interactive)
+    ;; Add org-return only if the line is not empty
+    ;; (when current-line-empty-p nil (org-return))
+    ;; NOT WORKING
+    (move-end-of-line nil)
+    (newline)
+    (insert "* ---- ")
+    ;;(org-time-stamp '(16) nil)
+    ;; concat string method
+    (insert
+     (concat
+      "<"
+      (car (s-split "\\." (buffer-name))) " "
+      (format-time-string "%a" (date-to-time (car (s-split "\\." (buffer-name))))) " "
+      (format-time-string "%H:%M" (current-time) nil)
+      ">"
+      ))
+    (insert " "))
+
+#+END_SRC
+
+* Initialize variables
+#+BEGIN_SRC emacs-lisp
+  (org-jrnl-init-vars)
+#+END_SRC
+
+* Format Apple Messages as jrnl entry
+#+begin_src emacs-lisp
+(defun org-jrnl-format-imessages (beg end)
+  "Operating on a region from BEG to END."
+  (interactive "r") ; 'r' passes point and mark as beg and end
+  (replace-regexp-in-region "\t" "- " beg end)
+  (replace-regexp-in-region "\r" "\n" beg end)
+  (replace-regexp-in-region "^\\([a-zA-Z]\\)" "** \\1" beg end)
+  )
+
+#+end_src
+
+* Flip pages in org-jrnl
+** see /Users/alex/CodeBook/elisp/traverse-jrnl-buffers.org
+- [[/Users/alex/CodeBook/elisp/traverse-jrnl-buffers.org]]
+** code
+#+begin_src emacs-lisp
+(defun org-jrnl-fn-format-p (fn)
+  ;; split the buffer-name by "\\."
+  (let ((fn-list (split-string fn "\\.")))
+    ;; if all tests are passed, then return t else nil
+    (if (and  
+         (ignore-errors (org-parse-time-string (nth 0 fn-list)))
+         (member (nth 1 fn-list) '("Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"))
+         (equal (nth 2 fn-list) "jrnl")
+         (equal (nth 3 fn-list) "org")
+         )
+        ;; if all true return t
+        t 
+      ;; else return nil
+      nil 
+      )))
+
+
+(defun org-jrnl-goto-day (day)
+  ;; proceed only if the parameters are correct
+  (when (or (equal day "prev") (equal day "next"))
+    ;; get the current buffer's filename
+    (let ((path (buffer-file-name)))
+      ;; proceed only of the buffer is a file
+      (when path 
+        ;; split the path and the filename of the buffer
+        (let ((jrnl-dir  (file-name-directory path))
+              (jrnl-fn (file-name-nondirectory path)))
+          ;; proceed only if the filename is in the correct format
+          (when (org-jrnl-fn-format-p jrnl-fn)
+            ;; convert jrnl-fn to an org-datetime
+            (let ((jrnl-fn-org-datetime 
+                   ;; convert to org-datetime
+                   (org-time-string-to-time 
+                    ;; make the string an org-datetime string "<YYYY-mm-dd aaa>"
+                    (concat "<"
+                            ;; combine to a single string with a space separator: "YYYY-mm-dd aaa"
+                            (string-join 
+                             ;; get the first two strings in the list: "YYYY-mm-dd" "aaa"
+                             (seq-take 
+                              ;; split the filename using "\\." as delimiter:  ("YYYY-mm-dd" "aaa" "jrnl" "org")
+                              (split-string jrnl-fn "\\.")
+                              2)
+                             " ")
+                            ">"))))
+              ;; construct the full path of the previous or next day file, 
+              (let ((jrnl-visit-filename
+                     ;; concat jrnl-dir, YYYY-mm-dd.aaa, ".jrnl.org"
+                    (concat 
+                     jrnl-dir
+                     ;; convert the datetime string into a filename: "YYYY-mm-dd aaa"  -> "YYYY-mm-dd.aaa"
+                     (string-replace " " "." 
+                                     ;; convert the org-datetime back to a string formatted YYYY-mm-dd aaa
+                                     (format-time-string 
+                                      (car org-time-stamp-formats) 
+                                      ;; if prev then subtract 1 day, if next then add one day to org-datetime 
+                                      (cond ((equal day "prev") (time-subtract jrnl-fn-org-datetime (days-to-time 1))) 
+                                            ((equal day "next") (time-add      jrnl-fn-org-datetime (days-to-time 1)))))) 
+                     ".jrnl.org" )))
+
+                ;; open the file if it exists
+                (when (file-exists-p jrnl-visit-filename)
+                  (find-file jrnl-visit-filename))))))))))
+
+
+(defun org-jrnl-goto-day-prev nil
+  "Wrapper function for key mapping"
+  (interactive)
+  (org-jrnl-goto-day "prev")
+  )
+
+(defun org-jrnl-goto-day-next nil
+  "Wrapper function for key mapping"
+  (interactive)
+  (org-jrnl-goto-day "next")
+  )
+
+;; https://www.masteringemacs.org/article/mastering-key-bindings-emacs
+;;
+(defvar org-jrnl-repeat-map
+ (let ((map (make-sparse-keymap)))
+   (define-key map "p" 'org-jrnl-goto-day-prev)
+   (define-key map "n" 'org-jrnl-goto-day-next)
+   map)
+ "Repeating map for org-jrnl"
+ )
+
+;; put it in to the repeat map
+(put 'org-jrnl-goto-day-prev 'repeat-map 'org-jrnl-repeat-map)
+(put 'org-jrnl-goto-day-next 'repeat-map 'org-jrnl-repeat-map)
+
+
+
+#+end_src
+
