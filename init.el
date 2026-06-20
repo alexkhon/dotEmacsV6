@@ -178,7 +178,7 @@
 ;; ibuffer
 ;; ===========================================================================
 
-(org-babel-load-file (expand-file-name "~/Config/dotEmacsV5/babel/ibuffer.org"))
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/ibuffer.org"))
 
 ;; ===========================================================================
 ;; minibuffer packages
