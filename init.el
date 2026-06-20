@@ -110,53 +110,6 @@
      ))
 )
 
-;; org-modern
-;; ---------------------------------------------------------------------------
-(use-package org-modern
-  :config
-  ;; Add frame borders and window dividers
-  (modify-all-frames-parameters
-   '((right-divider-width . 10)
-     (internal-border-width . 10)))
-  (dolist (face '(window-divider
-                  window-divider-first-pixel
-                  window-divider-last-pixel))
-    (face-spec-reset-face face)
-    (set-face-foreground face (face-attribute 'default :background)))
-  (set-face-background 'fringe (face-attribute 'default :background))
-
-  (setq
-   ;; Edit settings
-   org-auto-align-tags nil
-   org-tags-column 0
-   org-catch-invisible-edits 'show-and-error
-   org-special-ctrl-a/e t
-   org-insert-heading-respect-content t
-   ;; Org styling, hide markup etc.
-   org-hide-emphasis-markers t
-   org-pretty-entities t
-   org-agenda-tags-column 0
-   org-ellipsis " …")
-
-  (setq org-modern-star '("◉" "○" "◈" "◇" "•"))
-  
-;;  (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font Mono")
-  (with-eval-after-load 'org (global-org-modern-mode)))
-
-
-;; org-modern-indent
-;;  src code blocks have an outline
-;; ---------------------------------------------------------------------------
-(use-package org-modern-indent
-  :straight
-  (org-modern-indent :type git :host github :repo "jdtsmith/org-modern-indent")
-  :config ; add late to hook
-  (add-hook 'org-mode-hook #'org-modern-indent-mode 90))
-
-;; org-modern-indent requires that org-indented be turned on
-;; ---------------------------------------------------------------------------
-(setq org-startup-indented t)
-
 (org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/org-mode.org"))
 (org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/org-jrnl.org"))
 (org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/org-keys.org"))
