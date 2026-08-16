@@ -2,7 +2,7 @@
 
 # remove the links in $HOME
 rm -f $HOME/.emacs
-rm -f $HOME/.emacs.d
+rm -rf $HOME/.emacs.d
 
 # clean out emacsDir
 rm -rf $HOME/Config/dotEmacsV6/emacsDir
