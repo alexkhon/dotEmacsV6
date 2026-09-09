@@ -792,6 +792,10 @@
 
 (define-key meta-super-spc-map (kbd "*") #'mc/mark-all-dwim)
 
+;; NEED
+;; add l mark current line 
+;; add r for rectangle
+
 ;; find
 ;; --------------------------------------------------------------------------------
 (define-prefix-command 'meta-super-f-map)
