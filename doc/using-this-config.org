@@ -1,0 +1,8 @@
+* external installs
+** nerd fonts
+** ripgrep
+** keyboard remap (this may be outside of emacs)
+- on Lenovos, you have a PrtSc key that can be made into the Super key
+* configurations
+** keybindings
+- configure os level keybinding so they don't conflict
