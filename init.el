@@ -326,6 +326,9 @@
 (add-hook 'neotree-mode-hook
           (lambda ()
             (setq buffer-face-mode-face '(:family "0xProto Nerd Font Mono" :height 120))
+            (setq neo-window-width 35)      ; set width
+            (setq neo-smart-open t)         ; Focus current file when NeoTree opens
+            (setq neo-autorefresh nil)      ; Prevents aggressive constant centering
             (buffer-face-mode)))
 
 
