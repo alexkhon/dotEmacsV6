@@ -807,11 +807,15 @@
 
 ;; find
 ;; --------------------------------------------------------------------------------
-(define-prefix-command 'meta-super-f-map)
-(global-set-key (kbd "M-s-f") 'meta-super-f-map)
+(global-set-key (kbd "M-s-f") #'consult-line)
 
-(define-key meta-super-f-map (kbd "l") #'consult-line)
-(define-key meta-super-f-map (kbd "i") #'consult-imenu)
+;; jump
+;; --------------------------------------------------------------------------------
+(define-prefix-command 'meta-super-j-map)
+(global-set-key (kbd "M-s-j") 'meta-super-j-map)
+
+(define-key meta-super-j-map (kbd "i") #'consult-imenu)
+(define-key meta-super-j-map (kbd "l") #'goto-line)
 
 
 
