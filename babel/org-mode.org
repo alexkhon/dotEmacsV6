@@ -32,8 +32,12 @@
 
   (setq org-modern-star '("◉" "○" "◈" "◇" "•"))
   
-;;  (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font Mono")
-  (with-eval-after-load 'org (global-org-modern-mode)))
+  ;;  (set-face-attribute 'org-modern-symbol nil :family "Iosevka Nerd Font Mono")
+
+  ;; turned org-modern mode off
+  ;; (with-eval-after-load 'org (global-org-modern-mode))
+
+  )
 
 #+end_src
 
