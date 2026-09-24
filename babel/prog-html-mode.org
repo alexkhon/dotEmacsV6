@@ -1,0 +1,49 @@
+#+TITLE:     prog-html-mode.org
+#+EMAIL:     alex.k.hon@outlook.com
+#+AUTHOR:    Alex K. Hon
+#+OPTIONS:   ^:{}
+#+STARTUP:   overview
+
+
+* check for non-ascii
+Sometimes, ocr sourced code will replace characters like '<' with a
+non-ascii character '‹'
+
+M-x occur
+#+begin_src text
+[^[:ascii:]] or [[:nonascii:]]
+#+end_src
+
+* html tidy
+** HTML tidy
+*** OSX
+sudo port install tidy
+*** Linux
+???
+
+** code
+https://www.masteringemacs.org/article/executing-shell-commands-emacs
+
+#+begin_src emacs-lisp
+(defun tidy-html ()
+  "Tidies the HTML content in the buffer using `tidy'"
+  (interactive)
+  (shell-command-on-region
+   ;; beginning and end of buffer
+   (point-min)
+   (point-max)
+   ;; command and parameters
+   ;;  -i     :: indent
+   ;;  -w 120 :: wrap at column 120
+   ;;  -q     :: quiet output
+   "tidy -i -w 120 -q"
+   ;; output buffer
+   (current-buffer)
+   ;; replace?
+   t
+   ;; name of the error buffer
+   "*Tidy Error Buffer*"
+   ;; show error buffer?
+   t))
+
+#+end_src
