@@ -460,7 +460,7 @@
   :bind
   ;; https://emacs.stackexchange.com/questions/66352/how-to-change-key-binding-for-yas-expand
   (:map yas-minor-mode-map
-        ("C-'". yas-expand)
+        ("C-\\". yas-expand)
         ([(tab)] . nil)
         ("TAB" . nil))
   )
