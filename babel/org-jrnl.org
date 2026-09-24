@@ -84,6 +84,49 @@ See: https://emacs.stackexchange.com/questions/36944/key-binding-to-invoke-more-
 
 #+END_SRC
 
+* Create new time stamp
+** todo
+- check if there is a single timestamp, add an end timestamp
+- if there are two stimestamps, then do nothing
+** useful commands
+*** goto beginning of line
+(goto-char (line-beginning-position))
+*** goto first open bracket for timestamp (point is after character)
+(search-forward "<" (line-end-position) t 1)
+*** goto first close bracket for timestamp (point is after character)
+**** option 1
+(search-forward ">" (line-end-position) t 1)
+**** option 2
+(forward-sexp)
+*** goto second open bracket for timestamp (point is after character)
+(search-forward "<" (line-end-position) t 2)- goto the second open time bracket 
+*** returns component inside timestamp
+(org-at-timestamp-p t) - at the open bracket, this will return bracket
+** pseudo code
+- this should only work for *.jrnl.org
+- go to beginning of line
+  - count number of "<" and number of ">"
+    - it has to be 1 and 1 or 2 and 2
+  - goto "<", set mark, goto-before ">", end mark, check format
+** code
+See: https://emacs.stackexchange.com/questions/36944/key-binding-to-invoke-more-than-two-commands
+#+BEGIN_SRC emacs-lisp
+  (defun org-jrnl-create-new-timestamp ()
+    "Insert a timestamp with the current journal page's date"
+    (interactive)
+    (insert
+     (concat
+      "<"
+      (car (s-split "\\." (buffer-name))) " "
+      (format-time-string "%a" (date-to-time (car (s-split "\\." (buffer-name))))) " "
+      (format-time-string "%H:%M" (current-time) nil)
+      ">"
+      ))
+    (insert " "))
+
+#+END_SRC
+
+
 * Initialize variables
 #+BEGIN_SRC emacs-lisp
   (org-jrnl-init-vars)
