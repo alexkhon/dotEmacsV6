@@ -5,7 +5,9 @@
 #+STARTUP:   overview
 
 * Summary
-1. Assume you are using python virtual environments
+1. Create venv
+   - python -m venv .venv
+2. Assume you are using python virtual environments
    - $ source ./venv/bin/activate
    - (.venv) $ pip install <package>
 
