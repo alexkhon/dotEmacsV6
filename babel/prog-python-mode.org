@@ -131,3 +131,28 @@ pip install pep8
 ;; this modifies only M-x python-check
 (setq python-check-command "flake8 --ignore=E266")
 #+END_SRC
+
+
+* dap mode
+** code
+
+#+begin_src emacs-lisp
+(use-package dap-mode
+:ensure t
+:after lsp-mode ; Usually coupled with lsp-mode
+:config
+(dap-mode 1)
+(dap-ui-mode 1) ; Enables visual windows for locals, stacks, etc.
+(dap-tooltip-mode 1)
+
+;; Load the Python adapter module built into dap-mode
+(require 'dap-python)
+
+;; Explicitly tell dap-mode to use modern debugpy instead of obsolete ptvsd
+(setq dap-python-debugger 'debugpy)
+
+;; Automatically discover the python executable (or set "python3")
+(setq dap-python-executable "python3"))
+
+#+end_src
+
