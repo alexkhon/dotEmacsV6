@@ -2,3 +2,4 @@
 emacsDir/**
 !emacsDir/early-init.el
 babel/*.el
+*~
