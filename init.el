@@ -534,6 +534,12 @@
 (global-auto-revert-mode t)
 (setq auto-revert-use-notify nil)
 
+;; Automatically follow sumbolic links
+;; My config files are all symlinks. This faciliates opening those files
+;; ---------------------------------------------------------------------------
+(setq vc-follow-symlinks t)
+
+
 ;; ===========================================================================
 ;; mark region
 ;; ===========================================================================
