@@ -839,7 +839,7 @@
 (window-divider-mode t)
 
 (org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/prog-mode.org"))
-;;(org-babel-load-file (expand-file-name "~/Config/dotEmacsV5/babel/prog-python-mode.org"))
+(org-babel-load-file (expand-file-name "~/Config/dotEmacsV6/babel/prog-python-mode.org"))
 
 ;; in c mode
 (global-set-key (kbd "S-<f5>") #'compile)
