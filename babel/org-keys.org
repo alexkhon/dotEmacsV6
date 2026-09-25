@@ -4,6 +4,11 @@
 #+OPTIONS:   ^:{}
 #+STARTUP:   overview
 
+* lexical binding
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
 * keybindings - set to <f2>
 See: https://www.emacswiki.org/emacs/PrefixKey
 

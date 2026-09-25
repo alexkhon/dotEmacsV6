@@ -1,3 +1,9 @@
+* lexical binding
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
+
 * nerd-icons
 #+begin_src emacs-lisp
 (use-package nerd-icons-dired

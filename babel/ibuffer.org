@@ -3,6 +3,11 @@ https://tech.tonyballantyne.com/2020/09/26/ibuffer-changed-my-life/
 http://martinowen.net/blog/2010/02/03/tips-for-emacs-ibuffer.html
 https://cestlaz.github.io/posts/using-emacs-34-ibuffer-emmet/
 
+* lexical binding
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
 * grouping
 #+begin_src emacs-lisp
 ;; Don't show empty groups

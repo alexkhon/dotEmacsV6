@@ -4,6 +4,11 @@
 #+OPTIONS:   ^:{}
 #+STARTUP:   overview
 
+* lexical binding
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
 * Set dependent packages
 1. s.el is a package for string manipulation
 

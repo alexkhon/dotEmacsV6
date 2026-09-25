@@ -1,3 +1,9 @@
+* lexical binding
+#+begin_src emacs-lisp
+;;; -*- lexical-binding: t -*-
+#+end_src
+
+
 * packages
 
 ** org-modern
